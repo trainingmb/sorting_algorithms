@@ -59,7 +59,9 @@ int partition(int beg, int pivot, int *i, size_t size)
 		{
 			if (temp != beg)
 			{
-				swap_int(i + temp, i + beg);
+				i[temp] = i[beg] ^ i[temp];
+				i[beg] = i[beg] ^ i[temp];
+				i[temp] = i[beg] ^ i[temp];
 				print_array(i, size);
 			}
 			temp++;
@@ -72,24 +74,12 @@ int partition(int beg, int pivot, int *i, size_t size)
 	{
 		if (i[beg] > i[pivot])
 		{
-			swap_int(i + pivot, i + beg);
+			i[pivot] = i[beg] ^ i[pivot];
+			i[beg] = i[beg] ^ i[pivot];
+			i[pivot] = i[beg] ^ i[pivot];
 			print_array(i, size);
 		}
 		beg++;
 	}
 	return (beg);
-}
-
-/**
-  * swap_int - swaps the values of two integers
-  * @a: take an int
-  * @b: take an int
-  */
-void swap_int(int *a, int *b)
-{
-	int temp;
-
-	temp = *a;
-	*a = *b;
-	*b = temp;
 }
